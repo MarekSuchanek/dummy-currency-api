@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Dummy currency API</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Dummy currency API</h1>
+
+<p>This is dummy currency API for <a href="" target="_blank">MI-AFP/hw10</a>. It does not provide real exchange rates but some random very near to real ones (3rd May 2018).</p>
+<hr>
+            <h2>Authorization</h2>
+
+<p>For authorization, you need a <strong>token</strong> and use it in requests as <code>Authorization</code> header:</p>
+
+<pre>
+Authorization: token SECRET_TOKEN
+</pre>
+            <hr>
+            <h2>Endpoints</h2>
+
+<p>For non-existing routes, <code>404 NOT FOUND</code> is returned.</p>
+
+            <h3>List currencies</h3>
+
+<p>Get list of currencies supported by this service. It provides code (ISO 4217), name, and sign for each currency.</p>
+
+<p>This endpoint requires authorization, otherwise <code>401 UNAUTHORIZED</code> is returned.</p>
+
+<h4>Request</h4>
+<pre>GET /currencies</pre>
+
+<h4>Response (200 OK)</h4>
+
+<pre>
+[
+    {
+        "code": "USD",
+        "name": "U.S. Dollar",
+        "sign": "$"
+    },
+    {
+        "code": "EUR",
+        "name": "Euro",
+        "sign": "€"
+    },
+    {
+        "code": "CZK",
+        "name": "Czech Koruna",
+        "sign": "Kč"
+    },
+    {
+        "code": "GBP",
+        "name": "Pound Sterling",
+        "sign": "£"
+    },
+    {
+        "code": "CNY",
+        "name": "Chinese Yuan Renminbi",
+        "sign": "¥"
+    }
+]
+</pre>
+<h3>Get rates for currency</h3>
+
+<p>Get exchange rates for given currency. The response consists of requested currency code, timestamp and list of rates for other currencies.</p>
+
+<p>This endpoint requires authorization, otherwise <code>401 UNAUTHORIZED</code> is returned.</p>
+
+<p>If unsupported currency is requested, <code>400 BAD REQUEST</code> is returned.</p>
+
+<h4>Request</h4>
+<pre>GET /exchange-rates/CURRENCY_CODE</pre>
+
+<h4>Response (200 OK)</h4>
+
+<p>Example for <code>/exchange-rates/USD</code>.</p>
+
+<pre>
+{
+    "base": "USD",
+    "rates": {
+        "CNY": 6.421523658213468,
+        "CZK": 21.225549188304978,
+        "EUR": 0.8338408269993384,
+        "GBP": 0.7338134285779605
+    },
+    "timestamp": "2018-05-03 15:15:22.585259"
+}
+</pre>
+
+            <hr>
+            <footer class="footer" style="text-align: center; color: #AAA;">Marek Suchánek &copy; 2018</footer>
+        </div>
+    </body>
+</html>
