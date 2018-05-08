@@ -1,5 +1,6 @@
 import datetime
 import flask
+import flask_cors
 import hashlib
 import random
 
@@ -26,6 +27,7 @@ def index():
 
 
 @app.route('/currencies')
+@flask_cors.cross_origin()
 def currencies():
     print(flask.request.headers.get('Authorization', ''))
     print(api_token)
@@ -50,6 +52,7 @@ def recalc_rates(currency):
 
 
 @app.route('/exchange-rates/<currency>')
+@flask_cors.cross_origin()
 def rates(currency):
     if not flask.request.headers.get('Authorization', '') == api_token:
         flask.abort(401)
